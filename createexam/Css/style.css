@@ -1,0 +1,72 @@
+body{ direction: rtl;}
+
+.p{
+    font-size: 25px;
+    color: red;
+}
+.qs{
+    color:#fff;
+    margin-left: 10px;
+}
+.form-title {
+    width: 400px; 
+    padding: 5px 10px 5px 0px;
+    border: 0px;
+    border-radius: 8px;
+    font-size: 15px;
+}
+.select-type{
+    width: 139px;
+    padding: 5px;
+    font-size: 15px;
+}
+
+#row-que{
+    display: block;
+}
+
+#add{
+    display: none;
+    margin-bottom: 10px;
+}
+.navbar-fixed-top, .navbar-fixed-bottom{
+    position: relative;
+}
+.glyphicon-remove:hover {
+    cursor: pointer;
+}
+
+#exam{
+    background-color: aqua;
+    width:95%;
+    height: auto;
+    margin-right: 2.5%;
+}
+
+#net{
+    display: none;
+}
+#net:hover {
+    cursor: default;
+}
+#buttonexam:hover {
+    cursor: default;
+}
+@media(max-width:500px){
+    .form-title{
+        width: 250px;  
+    }    
+}
+#leftside{
+    display: none;
+    
+}
+#conform{
+    display: none;
+    
+}
+#net{
+  margin-right: 180px;
+    
+}
+

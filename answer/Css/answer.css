@@ -1,0 +1,143 @@
+.header{
+    height: 150px;
+    border-bottom-color: transparent; 
+}
+
+.navbar{
+    
+    position: fixed;
+}
+.texttd{
+   font-size: 28px;
+   color: #3b3a36;
+   font-weight: 500;
+}
+.infoetd{
+    position: absolute;
+    top: 10px;
+    right: 30;
+    width: 550px;
+    height: 130px;
+    background-color: transparent;
+    border-radius: 4px;
+}
+.infomod{
+    position: absolute;
+    top: 10px;
+    right: 850px;
+    width: 500px;
+    height: 130px;
+    background-color: transparent;
+    border-radius: 4px;
+}  
+.timer{
+position: absolute;
+top: 20px;
+right: 500px;
+width: 335px;
+height: 100px;
+font-size: 60px;
+font-weight:800;
+text-align: center;
+color: #3b3a36;
+}
+#days {
+  font-size: 35px;
+  color: #db4844;
+}
+#hours {
+  font-size: 70px;
+  color: /*#f07c22*/ white;
+}
+#minutes {
+  font-size: 70px;
+  color: /*#f6da74*/ white;
+}
+#seconds {
+  font-size: 70px;
+  color: /*#abcd58*/ white;
+  
+}
+.distime{
+border-width: 20px;
+font-weight: bold;
+font-size: 20px;
+padding: 5px;
+margin: 5px;
+background-color: #3b3a36;
+border-radius: 8px;
+    
+}
+.formetd{
+    overflow-y: scroll;
+    position: absolute;
+    background-color:#cccccc;
+    color: black; 
+    width: 1300px;
+    top: 152px;
+    right: 0px;
+    height: 530px;
+    font-size: 20px; 
+    margin-bottom: 20px;
+}
+.divetd{
+    background-color: #cccccc;
+    border-bottom:2px solid black;
+    width: 1283px;
+    
+}
+
+.sumbitetd{
+   margin-right: 550px;
+   margin-top: 20px;
+   margin-bottom: 20px;
+   font-size: 20px;
+   
+}
+.gchiox{
+    margin-right: 50px;
+    font-size: 20px;
+    width: 1286px;
+    height: 300px;
+
+}
+
+.navbarcss{ 
+  background-color: #c0dfd9;
+  height: 152px;
+  border-bottom: 2px solid black ;
+}
+.noexam{
+    position: relative;
+    width: 500px;
+    right: 400px;
+    top: 100px; 
+    
+}
+.confirm{
+    position:absolute;
+    background-color: #3b3a36;
+    width: 380px;
+    height: 150px;
+    right: 500px;
+    top: 150px;
+    border-radius: 6px; 
+    border: 1px solid white;
+    display: none;
+    color: white;
+    font-weight: bold;
+}
+.no{
+    margin-left:80px;padding-left: 0px;padding-right: 0px;width: 46px;
+    margin-right: 90px;
+}
+.yes{
+    
+    width: 46px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+}
+
+
+/*  style="background-color:#c0dfd9;" */

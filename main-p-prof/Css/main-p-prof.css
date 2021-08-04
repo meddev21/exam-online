@@ -1,0 +1,230 @@
+.navbarc{
+    background-color:#424245;
+    height: 50px;
+}
+body{
+    background-color: #929292;
+    overflow-x: hidden; 
+  }
+
+.links{
+    background-color: blue; 
+}
+.navbar-inverse .navbar-nav > li > a {
+   color:#d9d9d9;
+   font-size: 20px; 
+}
+.navbar-inverse .navbar-nav {
+    position:relative;
+    top: 0px;
+    right: 20px; 
+    
+}
+.image{
+    position: absolute;
+    right: 1150px;
+    width: 100px;
+
+}
+.image > img{
+    width: 100px;
+    height: 50px;
+    
+}
+
+.image > img:hover{
+    width: 105px;
+    height: 55px;
+}
+.firstdiv{
+    position: relative;
+    top: 50px;
+    background-color: white;
+    border: black solid 1px;
+    height: 500px;
+    
+}
+.seconddiv{
+    position: relative;
+    top: 30px;
+    background-color: #57575c;
+    height: 500px;
+    
+}
+.thirddiv{
+    position: relative;
+    top: 0px;
+    background-color: #4a4a4f;
+    height: 40%;
+    width: 100%;
+}
+.arrowback img{
+    color: white;
+    font-size: 20px;
+}
+.arrowbac img{
+    color: white;
+    font-size: 20px;
+}
+.arrowback{
+    position: relative;
+    top: 100px;
+    right: 50px;
+	margin-bottom:20px;
+}
+.arrowbac{
+    position: relative;
+    top: 350px;
+    right: 50px;
+}
+.arrowback img:hover{
+    color: #d9d9d9;
+    width:30px;
+}
+.arrowbac img:hover{
+    color: #d9d9d9;
+    width:30px;
+}
+.second{
+    margin-right: 50px;
+    
+}
+.resultat{
+    position: relative;
+    width: 1000px;
+    right: 100px;
+    background-color: transparent;
+}
+
+.table > tbody > tr > td{
+    padding-right: 100px;
+    
+    }
+.table > thead > tr >th{
+    background-color: #bfbfbf;
+    padding-left: 100px;
+}
+.table > tbody tr:nth-child(odd){
+    background-color: #f2f2f2;
+}
+.titre{
+    color: white;
+    margin-right: 650px;
+    padding-top: 20px;
+    font-weight: bold;
+}
+.titre2{
+    color: white;
+    margin-right: 550px;
+    padding-top: 20px;
+    font-weight: bold;
+}
+.first {
+    position: relative;
+    right: 170px;
+}
+.action{     
+    position: absolute;
+    left: 840px;
+    background-color: #bfbfbf;
+    border-radius: 4px;
+    margin-left: 5px;
+    padding:10px;
+    width: 220px;
+}
+.first > thead > tr >th:first-child{
+    padding-left: 100px;
+    padding-right: 90px;
+    width: 840px;
+}
+
+.first > thead > tr >th:nth-child(2){  
+    width: 365px;
+    padding-left: 10px;
+}    
+.first > thead > tr >th:nth-child(3){  
+    padding-left: 50px;
+    padding-right: 120px;
+    width: 370px;
+}
+.first > thead > tr >th:last-child{
+    width: 560px;
+    padding-right: 110px;
+    padding-left: 100px;
+}
+
+
+.first > tbody > tr > td:first-child{  
+    padding-left: 50px;
+    padding-right: 150px;
+    width: 700px;
+
+}
+.first > tbody > tr > td:nth-child(2){  
+     padding-right: 50px;
+    padding-left: 100px;
+}
+.first > tbody > tr > td:nth-child(3){  
+    padding-left: 100px;   
+    padding-right: 70px;
+}
+.first > tbody > tr > td:last-child{
+ padding-right: 170px;
+    padding-left: 0px;
+    width: 610px;
+    }
+
+.second > thead > tr >th:first-child{
+    padding-left: 100px;
+    padding-right: 90px;
+    width: 340px;
+}
+
+.second > thead > tr >th:nth-child(2){  
+    width: 365px;
+    padding-left: 10px;
+}
+
+.second > thead > tr >th:last-child{
+    width: 560px;
+    padding-right: 110px;
+    padding-left: 100px;
+}
+
+
+.second > tbody > tr > td:first-child{  
+    padding-left: 50px;
+    padding-right: 80px;
+    width: 700px;
+}
+
+.second > tbody > tr > td:nth-child(2){  
+     padding-right: 50px;
+     padding-left: 30px;
+     width: 350px;
+}
+
+.second > tbody > tr > td:last-child{
+    padding-right: 230px;
+    padding-left: 0px;
+    width: 610px;
+    }
+
+.table > tbody tr{
+    background-color: #bfbfbf;
+}
+.table > tbody tr{
+    background: white;
+}
+  thead,tbody{
+    display:block;
+  }
+.table-fixed{
+    width: 100%;
+    background-color: #f3f3f3;}
+   tbody{
+    height:280px;
+    background-color: transparent;
+    overflow-y:auto;
+    width: 100%;
+    }

@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.navbarc{
+    background-color:#000;
+    height: 50px;
+}
+.navbar-inverse .navbar-nav > li > a {
+   color:#d9d9d9;
+   font-size: 20px; 
+}
+.navbar-inverse .navbar-nav {
+    position:relative;
+    top: 0px;
+    right: 20px; 
+    
+}
+.image{
+    position: absolute;
+    right: 1150px;
+    width: 100px;
+
+}
+.image > img{
+    width: 100px;
+    height: 50px;
+    
+}
+
+.image > img:hover{
+    width: 105px;
+    height: 55px;
+}
+
+
+body {
+    direction: rtl;
+} 
+
+header {
+    background-color: #A8A8A8;
+    text-align: center;
+    padding: 8px; 
+    font-family: Arial;
+}
+nav {
+    background-color: #000;
+    color: #d0c9c9;
+    font-size: 22px; 
+    font-family: Changa;
+    margin-bottom: 30px;
+} 
+
+nav ul {
+    padding: 10px;
+    text-align: center;
+}
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li:after {
+    content: " | "
+}
+
+nav ul li:last-child:after {
+    content: ""
+}
+
+.examsContainer {
+    
+    background-color: cadetblue;
+    margin: 10px;
+    padding: 10px;
+    
+}
+.orders{
+    position:absolute;
+    height: 300px;
+     overflow-y: auto; 
+    overflow-x: hidden;
+    background: black;
+}
+tbody td, thead th {
+    width: 1100px;
+}
+.square {
+    
+    width: 150px;
+	height: 150px;
+	background: red; 
+    padding: 10px;
+    display: inline-block;
+    
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #000;
+    color: white;
+}
+
+.tableContainer {
+    overflow-x:auto;
+}
+
+footer {
+    background-color: #000;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    direction: ltr;
+}
+.btnc{
+position: relative;
+top: 350px;
+right: 500px;
+font-weight: bold;
+font-size: 20px;
+margin-left: 150px;
+
+}
+.btnc:disabled{
+    cursor: default;
+}
