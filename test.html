@@ -3,237 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Screen Recorder & To-Do List</title>
+    <title>Screen Recorder</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        h1 {
             text-align: center;
-            color: #444;
+            margin-top: 50px;
         }
-        #recording-toggle {
-            display: block;
-            margin: 20px auto;
+        button {
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
-        }
-        #recording-toggle:hover {
-            background-color: #0056b3;
-        }
-        #todo-list {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        #new-task {
-            width: calc(100% - 90px);
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        #add-task {
-            width: 80px;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        #add-task:hover {
-            background-color: #218838;
-        }
-        .task {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        .task input {
-            flex-grow: 1;
-            margin-right: 10px;
-            padding: 5px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .task button {
-            padding: 5px 10px;
-            font-size: 14px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .task button.edit {
-            background-color: #ffc107;
-            color: white;
-        }
-        .task button.delete {
-            background-color: #dc3545;
-            color: white;
-        }
-        .task button:hover {
-            opacity: 0.8;
         }
     </style>
 </head>
 <body>
-    <h1>Screen Recorder & To-Do List</h1>
+    <h1>Screen Recorder</h1>
+    <button id="start-recording">Start Recording</button>
+    <script>
+        const startRecordingButton = document.getElementById("start-recording");
 
-    <!-- Screen Recorder Section -->
-    <button id="recording-toggle">Start Recording</button>
+        startRecordingButton.addEventListener("click", async () => {
+            try {
+                // Ask for permission to record the screen
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: { mediaSource: "screen" },
+                    audio: true,
+                });
 
-    <!-- To-Do List Section -->
-    <div id="todo-list">
-        <h2>To-Do List</h2>
-        <input type="text" id="new-task" placeholder="Enter a new task">
-        <button id="add-task">Add Task</button>
-        <div id="tasks"></div>
-    </div>
+                // If permission is granted, start recording
+                alert("Permission granted! Starting recording...");
+                startRecordingButton.textContent = "Recording...";
 
-    <script defer>
-        // Screen Recorder Code
-        var RECORDING_ONGOING = false;
-        var recordingToggle = document.getElementById("recording-toggle");
-        var blob, deviceRecorder = null;
-        var chunks = [];
+                // You can now use the `stream` object to record the screen
+                // For example, you can pass it to a MediaRecorder object
+                const recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
+                const chunks = [];
 
-        recordingToggle.addEventListener("click", async function () {
-            if (!RECORDING_ONGOING) {
-                try {
-                    // Request screen recording permission
-                    const stream = await navigator.mediaDevices.getDisplayMedia({
-                        video: { mediaSource: "screen" },
-                        audio: true,
-                    });
+                recorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        chunks.push(event.data);
+                    }
+                };
 
-                    RECORDING_ONGOING = true;
-                    recordingToggle.innerHTML = "Stop Recording";
-                    startRecording(stream);
-                } catch (error) {
-                    console.error('Error starting recording:', error);
-                    alert('Failed to start recording. Please grant permission to record your screen.');
-                }
-            } else {
-                RECORDING_ONGOING = false;
-                recordingToggle.innerHTML = "Start Recording";
-                stopRecording();
+                recorder.onstop = () => {
+                    const blob = new Blob(chunks, { type: "video/webm" });
+                    const url = URL.createObjectURL(blob);
+
+                    // Create a download link for the recorded video
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "recording.webm";
+                    a.click();
+
+                    // Clean up
+                    URL.revokeObjectURL(url);
+                    startRecordingButton.textContent = "Start Recording";
+                };
+
+                recorder.start();
+                startRecordingButton.onclick = () => {
+                    recorder.stop();
+                    stream.getTracks().forEach((track) => track.stop());
+                };
+            } catch (error) {
+                // Handle permission denial or errors
+                alert("Permission denied or error occurred: " + error.message);
+                console.error("Error:", error);
             }
         });
-
-        function startRecording(stream) {
-            const mimeType = MediaRecorder.isTypeSupported('video/webm') ? 'video/webm' : 'video/mp4';
-            deviceRecorder = new MediaRecorder(stream, { mimeType });
-
-            deviceRecorder.ondataavailable = (e) => {
-                if (e.data.size > 0) {
-                    chunks.push(e.data);
-                }
-            };
-
-            deviceRecorder.onstop = () => {
-                chunks = [];
-            };
-
-            deviceRecorder.start(250);
-        }
-
-        function stopRecording() {
-            var filename = window.prompt("File name", "video");
-            if (filename) {
-                deviceRecorder.stop();
-                blob = new Blob(chunks, { type: "video/webm" });
-                chunks = [];
-                var dataDownloadUrl = URL.createObjectURL(blob);
-
-                let a = document.createElement('a');
-                a.href = dataDownloadUrl;
-                a.download = `${filename}.webm`;
-                a.click();
-
-                URL.revokeObjectURL(dataDownloadUrl);
-            }
-        }
-
-        // To-Do List Code
-        const tasksContainer = document.getElementById("tasks");
-        const newTaskInput = document.getElementById("new-task");
-        const addTaskButton = document.getElementById("add-task");
-
-        let tasks = [];
-
-        // Load tasks from localStorage (if any)
-        if (localStorage.getItem("tasks")) {
-            tasks = JSON.parse(localStorage.getItem("tasks"));
-            renderTasks();
-        }
-
-        // Add a new task
-        addTaskButton.addEventListener("click", () => {
-            const taskText = newTaskInput.value.trim();
-            if (taskText) {
-                tasks.push({ id: Date.now(), text: taskText });
-                newTaskInput.value = "";
-                saveTasks();
-                renderTasks();
-            }
-        });
-
-        // Render all tasks
-        function renderTasks() {
-            tasksContainer.innerHTML = "";
-            tasks.forEach(task => {
-                const taskElement = document.createElement("div");
-                taskElement.className = "task";
-                taskElement.innerHTML = `
-                    <input type="text" value="${task.text}" data-id="${task.id}">
-                    <button class="edit" onclick="editTask(${task.id})">Edit</button>
-                    <button class="delete" onclick="deleteTask(${task.id})">Delete</button>
-                `;
-                tasksContainer.appendChild(taskElement);
-            });
-        }
-
-        // Edit a task
-        function editTask(id) {
-            const taskInput = document.querySelector(`input[data-id="${id}"]`);
-            const newText = taskInput.value.trim();
-            if (newText) {
-                tasks = tasks.map(task => task.id === id ? { ...task, text: newText } : task);
-                saveTasks();
-                renderTasks();
-            }
-        }
-
-        // Delete a task
-        function deleteTask(id) {
-            tasks = tasks.filter(task => task.id !== id);
-            saveTasks();
-            renderTasks();
-        }
-
-        // Save tasks to localStorage
-        function saveTasks() {
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-        }
     </script>
 </body>
 </html>
