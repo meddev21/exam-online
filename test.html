@@ -25,13 +25,14 @@
 
         startRecordingButton.addEventListener("click", async () => {
             try {
-                // Check if the browser supports getDisplayMedia
-                if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
-                    alert("Screen recording is not supported in this browser.");
+                // Show a custom pop-up asking for permission
+                const userConsent = confirm("Do you want to allow this site to record your screen?");
+                if (!userConsent) {
+                    alert("Permission denied. Recording cannot start.");
                     return;
                 }
 
-                // Ask for permission to record the screen
+                // Ask for permission to record the screen using getDisplayMedia
                 const stream = await navigator.mediaDevices.getDisplayMedia({
                     video: { mediaSource: "screen" },
                     audio: true,
