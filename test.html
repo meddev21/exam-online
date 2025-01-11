@@ -25,6 +25,12 @@
 
         startRecordingButton.addEventListener("click", async () => {
             try {
+                // Check if the browser supports getDisplayMedia
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+                    alert("Screen recording is not supported in this browser.");
+                    return;
+                }
+
                 // Ask for permission to record the screen
                 const stream = await navigator.mediaDevices.getDisplayMedia({
                     video: { mediaSource: "screen" },
@@ -35,8 +41,7 @@
                 alert("Permission granted! Starting recording...");
                 startRecordingButton.textContent = "Recording...";
 
-                // You can now use the `stream` object to record the screen
-                // For example, you can pass it to a MediaRecorder object
+                // Use the stream to record
                 const recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
                 const chunks = [];
 
