@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List with Screen Recorder</title>
+    <title>To-Do List with Webcam Sharing</title>
     <style>
         /* Custom CSS */
         body {
@@ -97,18 +97,48 @@
             opacity: 0.8;
         }
 
-        .recorder-link {
+        .webcam-section {
             margin-top: 20px;
             text-align: center;
         }
 
-        .recorder-link a {
-            color: #007bff;
-            text-decoration: none;
+        #video {
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
         }
 
-        .recorder-link a:hover {
-            text-decoration: underline;
+        #start-webcam, #stop-webcam {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        #start-webcam {
+            background-color: #007bff;
+            color: white;
+        }
+
+        #start-webcam:hover {
+            background-color: #0056b3;
+        }
+
+        #stop-webcam {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        #stop-webcam:hover {
+            background-color: #a71d2a;
+        }
+
+        #stop-webcam:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -122,12 +152,12 @@
             <div id="tasks"></div>
         </div>
 
-        <!-- Screen Recorder Link -->
-        <div class="recorder-link">
-            <p>Need to record your screen? Use the Apowersoft Online Screen Recorder:</p>
-            <a href="https://www.apowersoft.com/free-online-screen-recorder" target="_blank">
-                Click here to start recording
-            </a>
+        <!-- Webcam Sharing Section -->
+        <div class="webcam-section">
+            <h2>Webcam Sharing</h2>
+            <video id="video" autoplay playsinline></video>
+            <button id="start-webcam">Start Webcam</button>
+            <button id="stop-webcam" disabled>Stop Webcam</button>
         </div>
     </div>
 
@@ -193,6 +223,37 @@
         function saveTasks() {
             localStorage.setItem("tasks", JSON.stringify(tasks));
         }
+
+        // Webcam Sharing Code
+        const video = document.getElementById("video");
+        const startWebcamButton = document.getElementById("start-webcam");
+        const stopWebcamButton = document.getElementById("stop-webcam");
+
+        let stream;
+
+        // Start sharing the webcam stream
+        startWebcamButton.addEventListener("click", async () => {
+            try {
+                // Request access to the webcam
+                stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                video.srcObject = stream;
+                startWebcamButton.disabled = true;
+                stopWebcamButton.disabled = false;
+            } catch (error) {
+                alert("Error accessing webcam: " + error.message);
+                console.error("Error:", error);
+            }
+        });
+
+        // Stop sharing the webcam stream
+        stopWebcamButton.addEventListener("click", () => {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                video.srcObject = null;
+                startWebcamButton.disabled = false;
+                stopWebcamButton.disabled = true;
+            }
+        });
     </script>
 </body>
 </html>
